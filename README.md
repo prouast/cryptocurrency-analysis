@@ -1,5 +1,6 @@
 # cryptocurrency-analysis
 
-# Installation
+## Installation
 
-1. Make database: `$ sqlite3 database.db < create.sql`
+1. Obtain data using [coinmarketcap-scraper](https://github.com/prouast/coinmarketcap-scraper)
+2. Run R script
