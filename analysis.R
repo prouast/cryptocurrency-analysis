@@ -2,8 +2,10 @@ rm(list=ls(all=TRUE))
 
 # install.packages("RSQLite")
 # install.packages("ggplot2")
+# install.packages("corrplot")
 library(DBI)
 library(ggplot2)
+library(corrplot)
 
 ### Import data from sqlite and prepare
 con <- dbConnect(RSQLite::SQLite(), dbname='database.db')
@@ -53,6 +55,15 @@ analysis.data <- function(currencies, data, market=NULL) {
     temp <- merge(temp, market, by="datetime")
   data.frame(temp)
 }
+
+# Generates a dataframe with daily returns for a set of currencies
+analysis.return.data <- function(currencies, data) {
+  data <- reshape(data[data$currency_slug %in% currencies,c(6:8)], direction="wide", idvar="datetime", timevar="currency_slug")
+  data <- data[order(data$datetime),] # Sort
+  colnames(data) <- c("datetime", currencies)
+  return(data)
+}
+corrplot(cor(analysis.return.data(currencies[1:20,]$slug,vals)[,-1], use = "na.or.complete"), method="ellipse")
 
 # Plot return timelines
 plot.return.timeline <- function(currencies, data) {
