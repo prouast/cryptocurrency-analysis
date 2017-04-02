@@ -92,7 +92,7 @@ plot.return.vs.market <- function(currency, data, market) {
     labs(title=paste("Returns: ",currency," vs Market (cor = ",round(cor_, digits=4),")",sep=""), x=paste(currency, "return"), y="Market return") +
     theme(legend.title=element_blank())
 }
-plot.return.vs.market("ripple", vals, market)
+plot.return.vs.market("ethereum", vals, market)
 
 # Plot betas against latest market cap
 # TODO
