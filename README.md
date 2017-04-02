@@ -13,5 +13,9 @@ This is a work in progress. Steps taken so far:
 
 2. Calculate daily returns for each coin
 
-Example:  
-![Returns for bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-returns.png)
+![Returns for bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-returns.png?style=centerme)
+
+3. Calculate overall market returns by weighting individual returns with market capitalisations
+
+![Market return](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-return.png?style=centerme)
+
