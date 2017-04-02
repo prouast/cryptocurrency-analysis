@@ -8,23 +8,42 @@ con <- dbConnect(RSQLite::SQLite(), dbname='database.db')
 currencies <- dbGetQuery(con, "SELECT * FROM currency")
 vals <- dbGetQuery(con, "SELECT * FROM vals")
 vals$id <- NULL # Drop database IDs
+currencies$id <- NULL # Drop database IDs
 rm(con) # Close database connection
 vals$datetime <- as.Date(vals$datetime) # Format dates
+vals <- vals[!duplicated(vals[,6:7]),]
 vals <- vals[order(vals$currency_slug,vals$datetime),] # Sort
-vals$return <- Reduce(c,sapply(unique(vals$currency_slug), FUN=function(x) c(0,diff(vals[vals$currency_slug==x,]$price_usd)/(vals[vals$currency_slug==x,]$price_usd)[-length(vals[vals$currency_slug==x,]$price_usd)]))) # Calculate returns
-vals[vals$volume_usd==0,]$volume_usd <- 1 # Avoid 0 volume_usd values
 
 ### Analysis
+
+# Calculate returns
+vals$return <- Reduce(c,sapply(unique(vals$currency_slug), FUN=function(x) c(0,diff(vals[vals$currency_slug==x,]$price_usd)/(vals[vals$currency_slug==x,]$price_usd)[-length(vals[vals$currency_slug==x,]$price_usd)])))
 
 # Calculate weighted market returns
 weighted.return <- function(data) {
   dates <- unique(data$datetime)
-  returns <- sapply(dates, FUN=function(x) (data[data$datetime==x,]$return %*% data[data$datetime==x,]$volume_usd) / sum(data[data$datetime==x,]$volume_usd))
+  returns <- sapply(dates, FUN=function(x) (data[data$datetime==x,]$return %*% data[data$datetime==x,]$market_cap_usd) / sum(data[data$datetime==x,]$market_cap_usd))
   result <- data.frame(datetime=dates, weighted.return=returns)
   result <- result[order(result$datetime),] # Sort
   return(result)
 }
-weighted.returns <- weighted.return(vals)
+market <- weighted.return(vals)
+
+# Calculate betas
+currency.beta <- function(currency, data, market) {
+  dates <- intersect(data[data$currency_slug==currency,]$datetime, market$datetime)
+  return(cov(data[data$currency_slug==currency & data$datetime %in% dates,]$return,
+             market[market$datetime %in% dates,]$weighted.return)/var(market[market$datetime %in% dates,]$weighted.return))
+}
+currencies$beta <- sapply(currencies$slug, FUN=currency.beta, vals, market)
+
+# Plot return against weighted market return
+plot.returns <- function(currency, data, market) {
+  dates <- intersect(data[data$currency_slug==currency,]$datetime, market$datetime)
+  plot(market[market$datetime %in% dates,]$weighted.return ~ data[data$currency_slug==currency & data$datetime %in% dates,]$return,
+       xlab=currency, ylab="Weighted market return")
+}
+plot.returns("bitcoin", vals, market)
 
 # Generates a dataframe with complete daily information for a set of currencies
 analysis.data <- function(currencies, data) {
