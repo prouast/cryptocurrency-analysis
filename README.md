@@ -11,26 +11,29 @@ This is a work in progress. Steps taken so far:
 
 1. Obtain and clean data from [coinmarketcap](https://coinmarketcap.com) using [coinmarketcap-scraper](https://github.com/prouast/coinmarketcap-scraper)
 
-2. Calculate **daily returns** for each coin
+2. Calculate **daily returns** for each coin.
 
-	**Returns for bitcoin, ethereum and ripple**
+	- Using this data, we can plot the returns for arbitrary coins on a time axis. Example: **Returns for bitcoin, ethereum and ripple**
 
 	![Returns for bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-returns.png?style=centerme)
 
-	**Plotting bitcoin vs ethereum returns**
+	- This also allows us to investigate the correlations between arbitrary coins. Example: **Plotting bitcoin vs ethereum returns**
 	
 	![Returns for bitcoin vs ethereum](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-vs-ethereum-returns.png?style=centerme)
 
-	**Visualisation of the correlation matrix for top 20 cryptocurrencies**
+	- Finally, we can look at pairwise correlations between all coins: **Visualisation of the correlation matrix for top 20 cryptocurrencies**
 	
 	![Corrplot](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Corrplot.png?style=centerme)
 
-3. Calculate overall **market returns** by weighting individual returns with market capitalisations. This series is initially dominated by bitcoin, with more altcoin influence as their market capitalisations increase. 
+3. Calculate overall **market returns** by weighting individual returns with market capitalisations.
+   This series is initially dominated by bitcoin, with more altcoin influence as their market capitalisations increase.
 
-	**Market return**
+	- Corresponding to the first plot, we can now give a plot of the overall **Market return** across time:
 
 	![Market return](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-return.png?style=centerme)
 
-	**Plotting ethereum vs market return**
+	- Similarly, we can investigate the correlation of arbitrary coins with the market return. Example: **Plotting ethereum vs market return**
 	
 	![Market return](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
+	
+4. TODO: Calculate coin `beta`s to characterise the behaviour of each coin return with respect to the market return
