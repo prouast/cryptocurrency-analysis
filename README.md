@@ -40,7 +40,7 @@ This is a work in progress. Steps taken so far:
 	
 4. Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return.
 
-	![Beta Formula](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-return.png?style=centerme)
+	![Beta Formula](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/beta-formula.png?style=centerme)
 
 	- Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns.
 	  See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
