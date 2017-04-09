@@ -45,4 +45,4 @@ This is a work in progress. Steps taken so far:
 	  	  
 	- Here, we plot coin betas against market capitalisations for the top 15 coins in terms of market capitalisation.
 	
-	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
+	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
