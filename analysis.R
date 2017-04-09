@@ -39,9 +39,12 @@ market <- weighted.return(vals)
 currency.beta <- function(currency, data, market) {
   dates <- intersect(data[data$currency_slug==currency,]$datetime, market$datetime)
   return(cov(data[data$currency_slug==currency & data$datetime %in% dates,]$return,
-             market[market$datetime %in% dates,]$weighted.return)/var(market[market$datetime %in% dates,]$return))
+             market[market$datetime %in% dates,]$weighted.return)/var(market[market$datetime %in% dates,]$weighted.return))
 }
 currencies$beta <- sapply(currencies$slug, FUN=currency.beta, vals, market)
+
+# Fetch latest market capitalisation per currency
+currencies$mcap <- sapply(currencies$slug, FUN=function(x) vals[vals$currency_slug==x & vals$datetime==max(vals[vals$currency_slug==x,]$datetime),]$market_cap_usd)
 
 ### Plots
 
@@ -103,7 +106,18 @@ plot.return.vs.market <- function(currency, data, market) {
     labs(title=paste("Returns: ",currency," vs Market (cor = ",round(cor_, digits=4),")",sep=""), x=paste(currency, "return"), y="Market return") +
     theme(legend.title=element_blank())
 }
-plot.return.vs.market("ethereum", vals, market)
+plot.return.vs.market("factom", vals, market)
 
-# Plot betas against latest market cap
-# TODO
+# Plot betas of top currencies against latest market cap
+plot.beta.vs.mcap.num <- function(num, currencies) {
+  data <- currencies[order(currencies$mcap, decreasing=TRUE),] # Sort
+  data <- data[0:num,]
+  breaks <-  10**(1:10 * 0.5)
+  p <- ggplot(data, aes(x=mcap, y=beta))
+  p + geom_point() +
+    scale_x_log10() +
+    geom_text(aes(label=name),hjust=0, vjust=0) +
+    labs(title="Beta vs Market capitalisation", x="Market capitalisation [USD] (log scale)", y="Beta") +
+    theme(legend.title=element_blank())
+}
+plot.beta.vs.mcap.num(20, currencies)

@@ -7,6 +7,8 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
+*Data from 09/04/2017*
+
 This is a work in progress. Steps taken so far:
 
 1. Obtain and clean data from [coinmarketcap](https://coinmarketcap.com) using [coinmarketcap-scraper](https://github.com/prouast/coinmarketcap-scraper)
@@ -36,4 +38,13 @@ This is a work in progress. Steps taken so far:
 	
 	![Market return](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
 	
-4. TODO: Calculate coin `beta`s to characterise the behaviour of each coin return with respect to the market return
+4. Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return.
+
+	![Beta Formula](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-return.png?style=centerme)
+
+	- Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns.
+	  See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
+	  
+	- Here, we plot coin betas against market capitalisations for the top 15 coins in terms of market capitalisation.
+	
+	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
