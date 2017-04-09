@@ -42,9 +42,7 @@ This is a work in progress. Steps taken so far:
 
 	- Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns.
 	  See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
-	  
-	  ![Beta Formula](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/beta-formula.png?style=centerme)
-	  
+	  	  
 	- Here, we plot coin betas against market capitalisations for the top 15 coins in terms of market capitalisation.
 	
 	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
