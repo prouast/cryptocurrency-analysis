@@ -23,7 +23,7 @@ This is a work in progress. Steps taken so far:
 
 	- This also allows us to investigate the correlations between the daily returns of arbitrary coins. Example: **Plotting bitcoin vs ethereum returns**. Here, every point represents one day.
 	
-		> Correlation measures the linear relationship between two sets of data. A high value when comparing the daily returns of two coins indicates a linear relationship of the returns in the past.
+		> Correlation measures the linear relationship between two sets of data. A high value when comparing the daily returns of two coins indicates a positive linear relationship of the returns in the past.
 	
 	![Returns for bitcoin vs ethereum](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-vs-ethereum-returns.png?style=centerme)
 
@@ -49,7 +49,7 @@ This is a work in progress. Steps taken so far:
 	- Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns.
 	  See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
 	  
-		> Investors use the information encoded in the beta coefficient to characterise an asset's volatility and correlation with the market index.
+		> Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index.
 	  
 	- Here, we plot coin betas against market capitalisations for the top 15 coins in terms of market capitalisation.
 	
