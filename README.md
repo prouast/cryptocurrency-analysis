@@ -7,7 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
-*Data from 09/04/2017*
+*Data updated 23/04/2017; Extended to top 25; Added assets; Fixed error in corrplot*
 
 This is a work in progress. Steps taken so far:
 
@@ -27,7 +27,7 @@ This is a work in progress. Steps taken so far:
 	
 	![Returns for bitcoin vs ethereum](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-vs-ethereum-returns.png?style=centerme)
 
-	- Finally, we can look at pairwise correlations between all coins: **Visualisation of the correlation matrix for top 20 cryptocurrencies**.
+	- Finally, we can look at pairwise correlations between all coins: **Visualisation of the correlation matrix for top 25 cryptocurrencies**.
 	
 		> The (symmetric) correlation matrix visualises the correlation for each pair of variables - from perfect positive linear relationship (blue) to perfect negative linear relationship (red).
 	
@@ -51,6 +51,6 @@ This is a work in progress. Steps taken so far:
 	  
 		> Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement. 
 	  
-	- Here, we plot coin betas against market capitalisations for the top 15 coins in terms of market capitalisation.
+	- Here, we plot coin betas against market capitalisations for the top 25 coins in terms of market capitalisation.
 	
 	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
