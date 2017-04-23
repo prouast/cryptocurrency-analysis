@@ -9,20 +9,20 @@ library(corrplot)
 
 ### Import data from sqlite and prepare
 con <- dbConnect(RSQLite::SQLite(), dbname='database.db')
-currencies <- dbGetQuery(con, "SELECT * FROM currency")
+coins <- dbGetQuery(con, "SELECT * FROM coin")
 vals <- dbGetQuery(con, "SELECT * FROM vals")
 vals$id <- NULL # Drop database IDs
-currencies$id <- NULL # Drop database IDs
+coins$id <- NULL # Drop database IDs
 rm(con) # Close database connection
 vals$datetime <- as.Date(vals$datetime) # Format dates
-vals <- vals[!duplicated(vals[,6:7]),] # Remove duplicates
-vals <- vals[order(vals$currency_slug,vals$datetime),] # Sort
+vals <- vals[!duplicated(vals[,6:7]),] # Remove duplicates/one price per day
+vals <- vals[order(vals$coin_slug,vals$datetime),]; rownames(vals) <- 1:nrow(vals) # Sort
 
 ### Analysis
 
 # Calculate returns
-vals$return <- Reduce(c,sapply(unique(vals$currency_slug), FUN=function(x) c(0,diff(vals[vals$currency_slug==x,]$price_usd)/(vals[vals$currency_slug==x,]$price_usd)[-length(vals[vals$currency_slug==x,]$price_usd)])))
-vals$logreturn <- Reduce(c,sapply(unique(vals$currency_slug), FUN=function(x) c(0,log(vals[vals$currency_slug==x,]$price_usd[-1]/vals[vals$currency_slug==x,]$price_usd[-length(vals[vals$currency_slug==x,]$price_usd)]))))
+vals$return <- Reduce(c,sapply(unique(vals$coin_slug), FUN=function(x) c(0,diff(vals[vals$coin_slug==x,]$price_usd)/(vals[vals$coin_slug==x,]$price_usd)[-length(vals[vals$coin_slug==x,]$price_usd)])))
+vals$logreturn <- Reduce(c,sapply(unique(vals$coin_slug), FUN=function(x) c(0,log(vals[vals$coin_slug==x,]$price_usd[-1]/vals[vals$coin_slug==x,]$price_usd[-length(vals[vals$coin_slug==x,]$price_usd)]))))
 
 # Calculate weighted market returns
 weighted.return <- function(data) {
@@ -36,41 +36,42 @@ weighted.return <- function(data) {
 market <- weighted.return(vals)
 
 # Calculate betas
-currency.beta <- function(currency, data, market) {
-  dates <- intersect(data[data$currency_slug==currency,]$datetime, market$datetime)
-  return(cov(data[data$currency_slug==currency & data$datetime %in% dates,]$return,
+coin.beta <- function(coin, data, market) {
+  dates <- intersect(data[data$coin_slug==coin,]$datetime, market$datetime)
+  return(cov(data[data$coin_slug==coin & data$datetime %in% dates,]$return,
              market[market$datetime %in% dates,]$weighted.return)/var(market[market$datetime %in% dates,]$weighted.return))
 }
-currencies$beta <- sapply(currencies$slug, FUN=currency.beta, vals, market)
+coins$beta <- sapply(coins$slug, FUN=coin.beta, vals, market)
 
-# Fetch latest market capitalisation per currency
-currencies$mcap <- sapply(currencies$slug, FUN=function(x) vals[vals$currency_slug==x & vals$datetime==max(vals[vals$currency_slug==x,]$datetime),]$market_cap_usd)
+# Fetch latest market capitalisation per coin
+coins$mcap <- sapply(coins$slug, FUN=function(x) vals[vals$coin_slug==x & vals$datetime==max(vals[vals$coin_slug==x,]$datetime),]$market_cap_usd)
+coins <- coins[order(coins$mcap,coins$slug, decreasing=TRUE),]; rownames(coins) <- 1:nrow(coins) # Sort
 
 ### Plots
 
-# Generates a dataframe with complete daily information for a set of currencies
-analysis.data <- function(currencies, data, market=NULL) {
-  temp <- lapply(currencies, FUN=function(x) subset(data, currency_slug==x))
+# Generates a dataframe with complete daily information for a set of coins
+analysis.data <- function(coins, data, market=NULL) {
+  temp <- lapply(coins, FUN=function(x) subset(data, coin_slug==x))
   temp <- Reduce(function(df1, df2) merge(df1, df2, by="datetime"), temp)
-  if (length(currencies) > 1)
-    colnames(temp) <- c("datetime", sapply(currencies, function(slug) sapply(colnames(vals)[c(1:5,7:9)], function(x) paste(x, slug, sep="_"))))
+  if (length(coins) > 1)
+    colnames(temp) <- c("datetime", sapply(coins, function(slug) sapply(colnames(vals)[c(1:5,7:9)], function(x) paste(x, slug, sep="_"))))
   if (!is.null(market))
     temp <- merge(temp, market, by="datetime")
   data.frame(temp)
 }
 
-# Generates a dataframe with daily returns for a set of currencies
-analysis.return.data <- function(currencies, data) {
-  data <- reshape(data[data$currency_slug %in% currencies,c(6:8)], direction="wide", idvar="datetime", timevar="currency_slug")
-  data <- data[order(data$datetime),] # Sort
-  colnames(data) <- c("datetime", currencies)
+# Generates a dataframe with daily returns for a set of coins
+analysis.return.data <- function(coins, data) {
+  data <- reshape(data[data$coin_slug %in% coins,c(6:8)], direction="wide", idvar="datetime", timevar="coin_slug")
+  colnames(data) <- c("datetime", sort(coins))
+  data <- data[,c("datetime", coins)]
   return(data)
 }
-corrplot(cor(analysis.return.data(currencies[1:20,]$slug,vals)[,-1], use = "na.or.complete"), method="ellipse")
+corrplot(cor(analysis.return.data(coins[1:50,]$slug,vals)[,-1], use = "pairwise.complete.obs"), method="ellipse")
 
 # Plot return timelines
-plot.return.timeline <- function(currencies, data) {
-  p <- ggplot(data[data$currency_slug %in% currencies,], aes(datetime, return, color=factor(currency_slug)))
+plot.return.timeline <- function(coins, data) {
+  p <- ggplot(data[data$coin_slug %in% coins,], aes(datetime, return, color=factor(coin_slug)))
   p + geom_line() + 
     labs(title="Cryptocurrency returns", x="Date", y="Return") +
     theme(legend.title=element_blank())
@@ -87,30 +88,30 @@ plot.market.return.timeline <- function(market) {
 plot.market.return.timeline(market)
 
 # Plot returns against each other
-plot.return.vs.return <- function(currency1, currency2, data) {
-  data <- analysis.data(c(currency1, currency2), data)
-  cor_ <- cor(data[[paste("return_",currency1,sep="")]], data[[paste("return_",currency2,sep="")]])
-  p <- ggplot(data, aes_string(x=paste("return_",currency1,sep=""), y=paste("return_",currency2,sep="")))
+plot.return.vs.return <- function(coin1, coin2, data) {
+  data <- analysis.data(c(coin1, coin2), data)
+  cor_ <- cor(data[[paste("return_",coin1,sep="")]], data[[paste("return_",coin2,sep="")]])
+  p <- ggplot(data, aes_string(x=paste("return_",coin1,sep=""), y=paste("return_",coin2,sep="")))
   p + geom_point() +
-    labs(title=paste("Returns: ",currency1," vs ",currency2," (cor = ",round(cor_, digits=4),")",sep=""), x=paste(currency1, "Return"), y=paste(currency2, "Return")) +
+    labs(title=paste("Returns: ",coin1," vs ",coin2," (cor = ",round(cor_, digits=4),")",sep=""), x=paste(coin1, "Return"), y=paste(coin2, "Return")) +
     theme(legend.title=element_blank())
 }
 plot.return.vs.return("bitcoin", "ethereum", vals)
 
 # Plot return against weighted market return
-plot.return.vs.market <- function(currency, data, market) {
-  data <- analysis.data(currency, data, market)
+plot.return.vs.market <- function(coin, data, market) {
+  data <- analysis.data(coin, data, market)
   cor_ <- cor(data$return, data$weighted.return)
   p <- ggplot(data, aes(x=return, y=weighted.return))
   p + geom_point() +
-    labs(title=paste("Returns: ",currency," vs Market (cor = ",round(cor_, digits=4),")",sep=""), x=paste(currency, "return"), y="Market return") +
+    labs(title=paste("Returns: ",coin," vs Market (cor = ",round(cor_, digits=4),")",sep=""), x=paste(coin, "return"), y="Market return") +
     theme(legend.title=element_blank())
 }
-plot.return.vs.market("factom", vals, market)
+plot.return.vs.market("ethereum", vals, market)
 
 # Plot betas of top currencies against latest market cap
-plot.beta.vs.mcap.num <- function(num, currencies) {
-  data <- currencies[order(currencies$mcap, decreasing=TRUE),] # Sort
+plot.beta.vs.mcap.num <- function(num, coins) {
+  data <- coins[order(coins$mcap, decreasing=TRUE),] # Sort
   data <- data[0:num,]
   breaks <-  10**(1:10 * 0.5)
   p <- ggplot(data, aes(x=mcap, y=beta))
@@ -120,4 +121,4 @@ plot.beta.vs.mcap.num <- function(num, currencies) {
     labs(title="Beta vs Market capitalisation", x="Market capitalisation [USD] (log scale)", y="Beta") +
     theme(legend.title=element_blank())
 }
-plot.beta.vs.mcap.num(20, currencies)
+plot.beta.vs.mcap.num(25, coins)
