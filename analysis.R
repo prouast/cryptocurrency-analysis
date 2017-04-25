@@ -3,9 +3,13 @@ rm(list=ls(all=TRUE))
 # install.packages("RSQLite")
 # install.packages("ggplot2")
 # install.packages("corrplot")
+# install.packages("zoo")
 library(DBI)
 library(ggplot2)
+library(grid)
 library(corrplot)
+library(zoo)
+library(magrittr)
 
 ### Import data from sqlite and prepare
 con <- dbConnect(RSQLite::SQLite(), dbname='database.db')
@@ -16,7 +20,30 @@ coins$id <- NULL # Drop database IDs
 rm(con) # Close database connection
 vals$datetime <- as.Date(vals$datetime) # Format dates
 vals <- vals[!duplicated(vals[,6:7]),] # Remove duplicates/one price per day
-vals <- vals[order(vals$coin_slug,vals$datetime),]; rownames(vals) <- 1:nrow(vals) # Sort
+interpolate.missing.data <- function(data) {
+  coins <- unique(data$coin_slug)
+  newrows <- do.call("rbind", lapply(coins, FUN=missing.date.rows, data))
+  data <- rbind(data, newrows)
+  data <- data[order(data$coin_slug,data$datetime),]; rownames(data) <- 1:nrow(data) # Sort
+  for (coin in coins) {
+    idx <- colSums(!is.na(data[data$coin_slug==coin,1:5])) > 1
+    data[data$coin_slug==coin,c(idx,FALSE,FALSE)] <- na.approx(data[data$coin_slug==coin,c(idx,FALSE,FALSE)], na.rm=FALSE)
+  }
+  return(data)
+}
+missing.date.rows <- function(coin, data) {
+  dates <- unique(data[data$coin_slug==coin,6])
+  alldates <- seq(dates[1],dates[length(dates)],by="+1 day")
+  missingdates <- setdiff(alldates, dates)
+  return(data.frame(price_usd=rep(NA, length(missingdates)),
+                    price_btc=rep(NA, length(missingdates)),
+                    volume_usd=rep(NA, length(missingdates)),
+                    market_cap_usd=rep(NA, length(missingdates)),
+                    available_supply=rep(NA, length(missingdates)),
+                    datetime=as.Date(missingdates, origin="1970-01-01"),
+                    coin_slug=rep(coin, length(missingdates))))
+}
+vals <- interpolate.missing.data(vals) # Insert missing dates and interpolate values
 
 ### Analysis
 
@@ -34,6 +61,12 @@ weighted.return <- function(data) {
   return(result)
 }
 market <- weighted.return(vals)
+
+# Calculate Total market cap for each day
+market$cap <- sapply(market$datetime, FUN=function(date) sum(vals[vals$datetime==date,4]))
+
+# Calculate Herfindahl index for each day
+market$herfindahl <- sapply(market$datetime, FUN=function(date) sum((vals[vals$datetime==date,4]/sum(vals[vals$datetime==date,4]))^2))
 
 # Calculate betas
 coin.beta <- function(coin, data, market) {
@@ -122,3 +155,22 @@ plot.beta.vs.mcap.num <- function(num, coins) {
     theme(legend.title=element_blank())
 }
 plot.beta.vs.mcap.num(25, coins)
+
+# Plot total market cap and herfindahl index
+plot.mcap.herfindahl <- function(market) {
+  p1 <- ggplot(market, aes(datetime, cap)) + geom_line() + labs(x="Date", y="Market cap")
+  p2 <- ggplot(market, aes(datetime, herfindahl)) + geom_line() + labs(x="Date", y="Herfindahl index")
+  ## convert plots to gtable objects
+  library(gtable)
+  library(grid) # low-level grid functions are required
+  g1 <- ggplotGrob(p1)
+  #g1 <- gtable_add_cols(g1, unit(0,"mm")) # add a column for missing legend
+  g2 <- ggplotGrob(p2)
+  g <- rbind(g1, g2, size="first") # stack the two plots
+  g$widths <- unit.pmax(g1$widths, g2$widths) # use the largest widths
+  # center the legend vertically
+  g$layout[grepl("guide", g$layout$name),c("t","b")] <- c(1,nrow(g))
+  grid.newpage()
+  grid.draw(g)
+}
+plot.mcap.herfindahl(market)

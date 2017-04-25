@@ -13,7 +13,15 @@ This is a work in progress. Steps taken so far:
 
 1. Obtain and clean data from [coinmarketcap](https://coinmarketcap.com) using [coinmarketcap-scraper](https://github.com/prouast/coinmarketcap-scraper). This gives us daily closing prices for each coin.
 
-2. Calculate the **daily return** for each coin.
+2. Calculate **Overall market capitalisation** and **Herfindahl index** to illustrate the change in market capitalisation and competition between coins.
+
+	> The Herfindahl index measures competition in a market by summing the squares of all competitor market shares. It ranges from 1/N (highly competitive) to 1 (high concentration), where N is the number of competitors. [More information.](https://en.wikipedia.org/wiki/Herfindahl_index)
+
+	- Here, we see that both market capitalisation and competition are increasing over time.
+	
+	![Market cap and hHerfindahl index](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-cap-herfindahl.png?style=centerme)
+
+3. Calculate the **daily return** for each coin.
 
 	> The rate of return is the income from an investment expressed as a proportion of the original investment. Hence, here it is `(price(t) - price(t-1)) / price(t-1)`. [More information.](https://en.wikipedia.org/wiki/Rate_of_return)
 
@@ -33,7 +41,7 @@ This is a work in progress. Steps taken so far:
 	
 	![Corrplot](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Corrplot.png?style=centerme)
 
-3. Calculate overall **market returns** by weighting individual returns with market capitalisations.
+4. Calculate overall **market returns** by weighting individual returns with market capitalisations.
    This series is initially dominated by bitcoin, with more altcoin influence as their market capitalisations increase.
 
 	- Corresponding to the first plot, we can now give a plot of the overall **Market return** across time:
@@ -44,7 +52,7 @@ This is a work in progress. Steps taken so far:
 	
 	![Market return](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
 	
-4. Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return.
+5. Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return.
 
 	- Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns.
 	  See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
