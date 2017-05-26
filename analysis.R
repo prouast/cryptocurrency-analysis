@@ -100,7 +100,7 @@ analysis.return.data <- function(coins, data) {
   data <- data[,c("datetime", coins)]
   return(data)
 }
-corrplot(cor(analysis.return.data(coins[1:50,]$slug,vals)[,-1], use = "pairwise.complete.obs"), method="ellipse")
+corrplot(cor(analysis.return.data(coins[1:25,]$slug,vals)[,-1], use = "pairwise.complete.obs"), method="ellipse")
 
 # Plot return timelines
 plot.return.timeline <- function(coins, data) {
@@ -154,7 +154,7 @@ plot.beta.vs.mcap.num <- function(num, coins) {
     labs(title="Beta vs Market capitalisation", x="Market capitalisation [USD] (log scale)", y="Beta") +
     theme(legend.title=element_blank())
 }
-plot.beta.vs.mcap.num(25, coins)
+plot.beta.vs.mcap.num(20, coins)
 
 # Plot total market cap and herfindahl index
 plot.mcap.herfindahl <- function(market) {
