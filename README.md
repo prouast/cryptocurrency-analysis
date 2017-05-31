@@ -7,7 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
-*Data updated 26/05/2017; Extended to top 25; Added assets; Fixed error in corrplot*
+*Data updated 31/05/2017; Extended to top 25; Added assets; Fixed error in corrplot*
 
 This is a work in progress. Steps taken so far:
 
