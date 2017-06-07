@@ -51,19 +51,15 @@ vals <- interpolate.missing.data(vals) # Insert missing dates and interpolate va
 vals$return <- Reduce(c,sapply(unique(vals$coin_slug), FUN=function(x) c(0,diff(vals[vals$coin_slug==x,]$price_usd)/(vals[vals$coin_slug==x,]$price_usd)[-length(vals[vals$coin_slug==x,]$price_usd)])))
 vals$logreturn <- Reduce(c,sapply(unique(vals$coin_slug), FUN=function(x) c(0,log(vals[vals$coin_slug==x,]$price_usd[-1]/vals[vals$coin_slug==x,]$price_usd[-length(vals[vals$coin_slug==x,]$price_usd)]))))
 
-# Calculate weighted market returns
-weighted.return <- function(data) {
-  dates <- unique(data$datetime)
-  returns <- sapply(dates, FUN=function(x) (data[data$datetime==x,]$return %*% data[data$datetime==x,]$market_cap_usd) / sum(data[data$datetime==x,]$market_cap_usd))
-  logreturns <- sapply(dates, FUN=function(x) (data[data$datetime==x,]$logreturn %*% data[data$datetime==x,]$market_cap_usd) / sum(data[data$datetime==x,]$market_cap_usd))
-  result <- data.frame(datetime=dates, weighted.return=returns, weighted.logreturn=logreturns)
-  result <- result[order(result$datetime),] # Sort
-  return(result)
+# Calculate market data
+market.data <- function(vals) {
+  dates <- sort(unique(vals$datetime))
+  cap <- sapply(dates, FUN=function(date) sum(vals[vals$datetime==date,4]))
+  returns <- c(0,diff(cap)/cap[-length(cap)])
+  logreturns <- c(0,log(cap[-1]/cap[-length(cap)]))
+  data.frame(datetime=dates, cap=cap, returns=returns, logreturns=logreturns)
 }
-market <- weighted.return(vals)
-
-# Calculate Total market cap for each day
-market$cap <- sapply(market$datetime, FUN=function(date) sum(vals[vals$datetime==date,4]))
+market <- market.data(vals)
 
 # Calculate Herfindahl index for each day
 market$herfindahl <- sapply(market$datetime, FUN=function(date) sum((vals[vals$datetime==date,4]/sum(vals[vals$datetime==date,4]))^2))
@@ -72,9 +68,9 @@ market$herfindahl <- sapply(market$datetime, FUN=function(date) sum((vals[vals$d
 coin.beta <- function(coin, data, market) {
   dates <- intersect(data[data$coin_slug==coin,]$datetime, market$datetime)
   return(cov(data[data$coin_slug==coin & data$datetime %in% dates,]$return,
-             market[market$datetime %in% dates,]$weighted.return)/var(market[market$datetime %in% dates,]$weighted.return))
+             market[market$datetime %in% dates,]$returns)/var(market[market$datetime %in% dates,]$weighted.return))
 }
-coins$beta <- sapply(coins$slug, FUN=coin.beta, vals, market)
+coins$beta <- sapply(coins$slug, FUN=coin.beta, vals[vals$datetime>as.Date("2016-12-31"),], market)
 
 # Fetch latest market capitalisation per coin
 coins$mcap <- sapply(coins$slug, FUN=function(x) vals[vals$coin_slug==x & vals$datetime==max(vals[vals$coin_slug==x,]$datetime),]$market_cap_usd)
@@ -100,7 +96,8 @@ analysis.return.data <- function(coins, data) {
   data <- data[,c("datetime", coins)]
   return(data)
 }
-corrplot(cor(analysis.return.data(coins[1:25,]$slug,vals)[,-1], use = "pairwise.complete.obs"), method="ellipse")
+corrplot(cor(analysis.return.data(coins[1:25,]$slug,vals[vals$datetime>as.Date("2016-12-31"),])[,-1],
+             use = "pairwise.complete.obs"), method="ellipse")
 
 # Plot return timelines
 plot.return.timeline <- function(coins, data) {
@@ -113,7 +110,7 @@ plot.return.timeline(c("bitcoin","ethereum","ripple"), vals)
 
 # Plot market return timeline
 plot.market.return.timeline <- function(market) {
-  p <- ggplot(market, aes(datetime, weighted.return))
+  p <- ggplot(market, aes(datetime, returns))
   p + geom_line() + 
     labs(title="Cryptocurrency market return", x="Date", y="Return") +
     theme(legend.title=element_blank())
@@ -129,18 +126,18 @@ plot.return.vs.return <- function(coin1, coin2, data) {
     labs(title=paste("Returns: ",coin1," vs ",coin2," (cor = ",round(cor_, digits=4),")",sep=""), x=paste(coin1, "Return"), y=paste(coin2, "Return")) +
     theme(legend.title=element_blank())
 }
-plot.return.vs.return("bitcoin", "ethereum", vals)
+plot.return.vs.return("bitcoin", "ethereum", vals[vals$datetime>as.Date("2016-12-31"),])
 
 # Plot return against weighted market return
 plot.return.vs.market <- function(coin, data, market) {
   data <- analysis.data(coin, data, market)
-  cor_ <- cor(data$return, data$weighted.return)
-  p <- ggplot(data, aes(x=return, y=weighted.return))
+  cor_ <- cor(data$return, data$returns)
+  p <- ggplot(data, aes(x=return, y=returns))
   p + geom_point() +
     labs(title=paste("Returns: ",coin," vs Market (cor = ",round(cor_, digits=4),")",sep=""), x=paste(coin, "return"), y="Market return") +
     theme(legend.title=element_blank())
 }
-plot.return.vs.market("ethereum", vals, market)
+plot.return.vs.market("ethereum", vals[vals$datetime>as.Date("2016-12-31"),], market)
 
 # Plot betas of top currencies against latest market cap
 plot.beta.vs.mcap.num <- function(num, coins) {
