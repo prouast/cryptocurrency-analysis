@@ -68,7 +68,7 @@ market$herfindahl <- sapply(market$datetime, FUN=function(date) sum((vals[vals$d
 coin.beta <- function(coin, data, market) {
   dates <- intersect(data[data$coin_slug==coin,]$datetime, market$datetime)
   return(cov(data[data$coin_slug==coin & data$datetime %in% dates,]$return,
-             market[market$datetime %in% dates,]$returns)/var(market[market$datetime %in% dates,]$weighted.return))
+             market[market$datetime %in% dates,]$returns)/var(market[market$datetime %in% dates,]$returns))
 }
 coins$beta <- sapply(coins$slug, FUN=coin.beta, vals[vals$datetime>as.Date("2016-12-31"),], market)
 
@@ -151,7 +151,7 @@ plot.beta.vs.mcap.num <- function(num, coins) {
     labs(title="Beta vs Market capitalisation", x="Market capitalisation [USD] (log scale)", y="Beta") +
     theme(legend.title=element_blank())
 }
-plot.beta.vs.mcap.num(25, coins)
+plot.beta.vs.mcap.num(20, coins)
 
 # Plot total market cap and herfindahl index
 plot.mcap.herfindahl <- function(market) {

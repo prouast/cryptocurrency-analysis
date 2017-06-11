@@ -7,7 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
-*Data updated 07/06/2017; Improved market return calculation; Restricted some visualizations to data from 2017*
+*Data updated 11/06/2017; Improved market return calculation; Restricted some visualizations to data from 2017*
 
 This is a work in progress. Steps taken so far:
 
