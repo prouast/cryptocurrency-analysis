@@ -171,3 +171,4 @@ plot.mcap.herfindahl <- function(market) {
   grid.draw(g)
 }
 plot.mcap.herfindahl(market)
+
