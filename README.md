@@ -7,7 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
-*Data updated 28/06/2017; Improved market return calculation; Restricted some visualizations to data from 2017*
+*Data updated 12/07/2017. Restricted some visualizations to data from 2017*
 
 This is a work in progress. Steps taken so far:
 
@@ -17,7 +17,7 @@ This is a work in progress. Steps taken so far:
 
 	> The Herfindahl index measures competition in a market by summing the squares of all competitor market shares. It ranges from 1/N (highly competitive) to 1 (high concentration), where N is the number of competitors. [More information.](https://en.wikipedia.org/wiki/Herfindahl_index)
 
-	- Here, we see that both market capitalisation and competition are increasing over time.
+	- Here, we see that both market capitalisation and competition are increasing over time. With the recent correction, the decrease in concentration has stagnated.
 
 	![Market cap and Herfindahl index](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-cap-herfindahl.png?style=centerme)
 
