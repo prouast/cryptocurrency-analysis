@@ -151,7 +151,7 @@ plot.beta.vs.mcap.num <- function(num, coins) {
     labs(title="Beta vs Market capitalisation", x="Market capitalisation [USD] (log scale)", y="Beta") +
     theme(legend.title=element_blank())
 }
-plot.beta.vs.mcap.num(20, coins)
+plot.beta.vs.mcap.num(25, coins)
 
 # Plot total market cap and herfindahl index
 plot.mcap.herfindahl <- function(market) {
