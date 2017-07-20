@@ -7,7 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
-*Data updated 16/07/2017. Restricted some visualizations to data from 2017*
+*Data updated 20/07/2017. Restricted some visualizations to data from 2017*
 
 This is a work in progress. Steps taken so far:
 
@@ -59,6 +59,6 @@ This is a work in progress. Steps taken so far:
 
 		> Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement.
 
-	- Here, we plot coin betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only. EOS has comparably few data points, hence the extreme value.*
+	- Here, we plot coin betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only.*
 
 	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
