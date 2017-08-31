@@ -7,7 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 ## Progress
 
-*Data updated 29/08/2017. Restricted some visualizations to data from 2017*
+*Data updated 31/08/2017. Restricted some visualizations to data from 2017*
 
 This is a work in progress. Steps taken so far:
 
