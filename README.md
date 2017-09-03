@@ -53,7 +53,7 @@ This is a work in progress. Steps taken so far:
 
     Example: **Bitcoin, Ethereum and Ripple**.
 
-	  ![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
+    ![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
 
   - We can also investigate the correlations between the daily returns of arbitrary coins. Correlation measures the linear relationship between two sets of data. A high positive value when comparing the daily returns of two coins indicates a strong positive linear relationship of the returns in the past.
 
@@ -73,7 +73,7 @@ This is a work in progress. Steps taken so far:
 
     Example: **Plotting Ethereum vs Market return**. *Note that this plot is based on data from 2017 only.*
 
-    ![Returns eitcoin vs market](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-returns.png?style=centerme)
+    ![Returns eitcoin vs market](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
 
   - Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return. Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns. See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
 
