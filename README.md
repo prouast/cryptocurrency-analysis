@@ -53,7 +53,7 @@ This is a work in progress. Steps taken so far:
 
     Example: **Bitcoin, Ethereum and Ripple**.
 
-	   ![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
+	  ![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
 
 	- We can also investigate the correlations between the daily returns of arbitrary coins. Correlation measures the linear relationship between two sets of data. A high positive value when comparing the daily returns of two coins indicates a strong positive linear relationship of the returns in the past.
 
