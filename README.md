@@ -43,37 +43,37 @@ This is a work in progress. Steps taken so far:
 
   - **Volatility**: The annualized volatility of a given coin; based on the logarithmic return from the last 30 days.
 
-  > Example: **Bitcoin**.
+    Example: **Bitcoin**.
 
-  ![Bitcoin statistics](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-statistics.png?style=centerme)
+    ![Bitcoin statistics](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-statistics.png?style=centerme)
 
 4. Comparing different coins directly.
 
   - Using the already calculated statistics, we can plot daily market capitalisations, returns and volatilities of arbitrary coins on a time axis.
 
-  > Example: **Bitcoin, Ethereum and Ripple**.
+    Example: **Bitcoin, Ethereum and Ripple**.
 
-	![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
+	   ![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
 
 	- We can also investigate the correlations between the daily returns of arbitrary coins. Correlation measures the linear relationship between two sets of data. A high positive value when comparing the daily returns of two coins indicates a strong positive linear relationship of the returns in the past.
 
-  > To illustrate the idea of correlation between two coin returns: **Plotting Bitcoin vs Ethereum returns**. Here, every point represents one day. Notice the slightly positive linear relationship? *Note that this plot is based on data from 2017 only.*
+    To illustrate the idea of correlation between two coin returns: **Plotting Bitcoin vs Ethereum returns**. Here, every point represents one day. Notice the slightly positive linear relationship? *Note that this plot is based on data from 2017 only.*
 
-	![Returns bitcoin vs ethereum](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-vs-ethereum-returns.png?style=centerme)
+	  ![Returns bitcoin vs ethereum](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-vs-ethereum-returns.png?style=centerme)
 
 	- To get a better idea of the current relationships between coin returns, we can look at pairwise correlations between all coins. The (symmetric) correlation matrix visualises the correlation for each pair of variables - from perfect positive linear relationship (blue) to perfect negative linear relationship (red).
 
-  > **Visualisation of the correlation matrix for top 25 cryptocurrencies**. *Note that this plot is based on data from 2017 only.*
+    **Visualisation of the correlation matrix for top 25 cryptocurrencies**. *Note that this plot is based on data from 2017 only.*
 
-	![Corrplot](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Corrplot.png?style=centerme)
+	  ![Corrplot](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Corrplot.png?style=centerme)
 
 5. Comparing individual coins with the overall market.
 
 	- Similarly to a previous plot, we can investigate the correlation of arbitrary coin returns with the market return.
 
-  > Example: **Plotting Ethereum vs Market return**. *Note that this plot is based on data from 2017 only.*
+    Example: **Plotting Ethereum vs Market return**. *Note that this plot is based on data from 2017 only.*
 
-  ![Returns eitcoin vs market](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-returns.png?style=centerme)
+    ![Returns eitcoin vs market](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-returns.png?style=centerme)
 
   - Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return. Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns. See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
 
@@ -81,4 +81,4 @@ This is a work in progress. Steps taken so far:
 
 	- Here, we plot coin betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only.*
 
-	![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
+    ![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
