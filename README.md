@@ -20,22 +20,27 @@ This is a work in progress. Steps taken so far:
 2. Use daily closing prices to calculate daily overall market statistics. For the sake of these calculations, the overall market is interpreted as an index/portfolio.
 
   - **Overall market capitalisation**: The sum of all coin valuations, i.e., closing prices multiplied with circulating supply as given by coinmarketcap. *Please note that this is a controversial metric.*
+
   - **Overall market return**: We use logarithmic returns to make daily changes in overall market value easily comparable. [More information.](https://en.wikipedia.org/wiki/Rate_of_return#Logarithmic_or_continuously_compounded_return)
+
   - **Overall market volatility**: The annualized overall market volatility illustrates the degree in variation of the changes in overall market capitalisation. For each day, the value is based on the logarithmic overall market returns of the last 30 days. [More information.](https://en.wikipedia.org/wiki/Volatility_(finance))
+
   - **Herfindahl index**: To illustrate the change in competition between coins. The Herfindahl index measures competition in a market by summing the squares of all competitor market shares. It ranges from 1/N (highly competitive) to 1 (high concentration), where N is the number of competitors. [More information.](https://en.wikipedia.org/wiki/Herfindahl_index)
 
-  > Here, we can observe how the market capitalisation has increased in 2017 by a factor of up to 20x.
-  > Up until the recent correction, this development was mirrored by an increase in competition. More recently, this development has stagnated.
-  > In the data on returns and volatility we find volatility clustering, which is common in financial time series: Times of relative calm, and times of sudden price movements.
-  > Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude. The hype of 2017 has caused slightly higher volatility again, however less than we observe for some periods between 2013 and 2015.
-  > Note that the annualized volatilities of stock indices such as the S&P 500 are typically much lower, compared to the early crypto days up to an **order of magnitude**.
+  Here, we can observe how the market capitalisation has increased in 2017 by a factor of up to 20x.
+  Up until the recent correction, this development was mirrored by an increase in competition. More recently, this development has stagnated.
+  In the data on returns and volatility we find volatility clustering, which is common in financial time series: Times of relative calm, and times of sudden price movements.
+  Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude. The hype of 2017 has caused slightly higher volatility again, however less than we observe for some periods between 2013 and 2015.
+  Note that the annualized volatilities of stock indices such as the S&P 500 are typically much lower, compared to the early crypto days up to an **order of magnitude**.
 
 	![Market statistics](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-statistics.png?style=centerme)
 
 3. Calculate statistics for each individual coin.
 
   - **Market capitalisation**: A given coin's valuation, i.e., closing price multiplied with circulating supply as given by coinmarketcap. *Please note that this is a controversial metric.*
+
   - **Return**: The daily logarithmic return of a given coin.
+
   - **Volatility**: The annualized volatility of a given coin; based on the logarithmic return from the last 30 days.
 
   > Example: **Bitcoin**.
@@ -72,7 +77,7 @@ This is a work in progress. Steps taken so far:
 
   - Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return. Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns. See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
 
-	 > Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement.
+	- Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement.
 
 	- Here, we plot coin betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only.*
 
