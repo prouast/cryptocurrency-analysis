@@ -27,13 +27,13 @@ This is a work in progress. Steps taken so far:
 
   - **Herfindahl index**: To illustrate the change in competition between coins. The Herfindahl index measures competition in a market by summing the squares of all competitor market shares. It ranges from 1/N (highly competitive) to 1 (high concentration), where N is the number of competitors. [More information.](https://en.wikipedia.org/wiki/Herfindahl_index)
 
-  Here, we can observe how the market capitalisation has increased in 2017 by a factor of up to 20x.
-  Up until the recent correction, this development was mirrored by an increase in competition. More recently, this development has stagnated.
-  In the data on returns and volatility we find volatility clustering, which is common in financial time series: Times of relative calm, and times of sudden price movements.
-  Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude. The hype of 2017 has caused slightly higher volatility again, however less than we observe for some periods between 2013 and 2015.
-  Note that the annualized volatilities of stock indices such as the S&P 500 are typically much lower, compared to the early crypto days up to an **order of magnitude**.
+    Here, we can observe how the market capitalisation has increased in 2017 by a factor of up to 20x.
+    Up until the recent correction, this development was mirrored by an increase in competition. More recently, this development has stagnated.
+    In the data on returns and volatility we find volatility clustering, which is common in financial time series: Times of relative calm, and times of sudden price movements.
+    Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude. The hype of 2017 has caused slightly higher volatility again, however less than we observe for some periods between 2013 and 2015.
+    Note that the annualized volatilities of stock indices such as the S&P 500 are typically much lower, compared to the early crypto days up to an **order of magnitude**.
 
-	![Market statistics](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-statistics.png?style=centerme)
+	   ![Market statistics](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-statistics.png?style=centerme)
 
 3. Calculate statistics for each individual coin.
 
