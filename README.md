@@ -55,7 +55,7 @@ This is a work in progress. Steps taken so far:
 
 	  ![Comparing bitcoin, ethereum and ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Coin-statistics.png?style=centerme)
 
-	- We can also investigate the correlations between the daily returns of arbitrary coins. Correlation measures the linear relationship between two sets of data. A high positive value when comparing the daily returns of two coins indicates a strong positive linear relationship of the returns in the past.
+  - We can also investigate the correlations between the daily returns of arbitrary coins. Correlation measures the linear relationship between two sets of data. A high positive value when comparing the daily returns of two coins indicates a strong positive linear relationship of the returns in the past.
 
     To illustrate the idea of correlation between two coin returns: **Plotting Bitcoin vs Ethereum returns**. Here, every point represents one day. Notice the slightly positive linear relationship? *Note that this plot is based on data from 2017 only.*
 
@@ -69,7 +69,7 @@ This is a work in progress. Steps taken so far:
 
 5. Comparing individual coins with the overall market.
 
-	- Similarly to a previous plot, we can investigate the correlation of arbitrary coin returns with the market return.
+  - Similarly to a previous plot, we can investigate the correlation of arbitrary coin returns with the market return.
 
     Example: **Plotting Ethereum vs Market return**. *Note that this plot is based on data from 2017 only.*
 
@@ -77,8 +77,8 @@ This is a work in progress. Steps taken so far:
 
   - Calculate coin `beta` to characterise the behaviour of each coin return with respect to the market return. Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns. See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
 
-	- Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement.
+  - Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement.
 
-	- Here, we plot coin betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only.*
+  - Here, we plot coin betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only.*
 
     ![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
