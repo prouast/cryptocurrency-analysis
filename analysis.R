@@ -206,7 +206,14 @@ analysis.return.data <- function(coins, data) {
 corrplot(cor(analysis.return.data(coins[1:25,]$slug,vals[vals$datetime>as.Date("2016-12-31"),])[,-1],
              use = "pairwise.complete.obs"), method="ellipse")
 
-# TODO Correlation between coins over time
+# Plot the correlation of two coins over time
+plot.corr.timeline <- function(coin1, coin2, mindays, maxdays, data) {
+  data <- analysis.data(c(coin1, coin2), data)
+  data$corr <- sapply(1:nrow(data), FUN=function(i) if(i<mindays) return(NA) else cor(data[max(1,i-maxdays):i,9],data[max(1,i-maxdays):i,17]))
+  p <- ggplot(data, aes(datetime, corr))
+  p + geom_line() + labs(x="Date", y="Correlation", title=paste("Correlation timeline: ", paste(c(coin1, coin2), collapse=", ")))
+}
+plot.corr.timeline("bitcoin", "ethereum", 30, 90, vals)
 
 ### 5. Comparing coins with overall market
 
@@ -233,7 +240,6 @@ coins$beta <- sapply(coins$slug, FUN=coin.beta, vals[vals$datetime>as.Date("2016
 plot.beta.vs.mcap.num <- function(num, coins) {
   data <- coins[order(coins$mcap, decreasing=TRUE),] # Sort
   data <- data[0:num,]
-  breaks <-  10**(1:10 * 0.5)
   p <- ggplot(data, aes(x=mcap, y=beta))
   p + geom_point() +
     scale_x_log10() +
@@ -243,4 +249,15 @@ plot.beta.vs.mcap.num <- function(num, coins) {
 }
 plot.beta.vs.mcap.num(25, coins)
 
-# TODO Beta over time
+# Plot betas over time
+plot.beta.timeline <- function(coins, mindays, maxdays, data, market) {
+  data <- data[data$coin_slug %in% coins,]
+  dates <- intersect(data$datetime, market$datetime)
+  result <- data.frame(datetime=as.Date(rep(dates, times=length(coins)), origin="1970-01-01"), coin=rep(coins,each=length(dates)))
+  result$beta <- Reduce(c, sapply(coins,
+                           function(coin) sapply(dates,
+                                          function(date) if(nrow(data[data$coin_slug==coin & date-maxdays<data$datetime & data$datetime<=date,])<mindays) return(NA) else coin.beta(coin, data[data$coin_slug==coin & date-maxdays<data$datetime & data$datetime<=date,], market))))
+  p <- ggplot(result, aes(datetime, beta, color=factor(coin)))
+  p + geom_line() + labs(x="Date", y="Beta", title=paste("Beta timeline: ", paste(coins, collapse=", "))) + theme(legend.title=element_blank())
+}
+plot.beta.timeline(c("bitcoin","ethereum","ripple"), 30, 90, vals, market)
