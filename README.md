@@ -11,7 +11,7 @@ The script `analysis.R` can then be run on this database.
 
 ## Progress
 
-*Data updated 21/09/2017. Added analysis of temporal development of return correlations.*
+*Data updated 27/09/2017. Added analysis of temporal development of return correlations.*
 
 This is a work in progress. Steps taken so far:
 

@@ -213,7 +213,7 @@ plot.corr.timeline <- function(coin1, coin2, mindays, maxdays, data) {
   p <- ggplot(data, aes(datetime, corr))
   p + geom_line() + labs(x="Date", y="Correlation", title=paste("Correlation timeline: ", paste(c(coin1, coin2), collapse=", ")))
 }
-plot.corr.timeline("bitcoin", "ethereum", 30, 90, vals)
+plot.corr.timeline("ethereum", "bitcoin", 30, 90, vals)
 
 ### 5. Comparing coins with overall market
 
