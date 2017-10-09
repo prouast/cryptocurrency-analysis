@@ -93,5 +93,5 @@ This is a work in progress. Steps taken so far:
 
 I am updating this page every week or so.
 
-Donate BTC: 18s8pb2maRn1K1DERJggxUuGVXCw9wTHLD
-Donate ETH: 0x586a8Dcc5d64A8d8d50e044bD69FA33d2D20c349
+* Donate BTC: 18s8pb2maRn1K1DERJggxUuGVXCw9wTHLD
+* Donate ETH: 0x586a8Dcc5d64A8d8d50e044bD69FA33d2D20c349
