@@ -88,3 +88,10 @@ This is a work in progress. Steps taken so far:
   	**Temporal development of beta for Bitcoin, Ethereum and Ripple.** *Using sliding time window of 90 days.*
   
   ![Beta timeline bitcoin, ethereum, ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-timeline.png?style=centerme)
+
+## Support me
+
+I am updating this page every week or so.
+
+Donate BTC: 18s8pb2maRn1K1DERJggxUuGVXCw9wTHLD
+Donate ETH: 0x586a8Dcc5d64A8d8d50e044bD69FA33d2D20c349
