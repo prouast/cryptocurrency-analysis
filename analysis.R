@@ -170,7 +170,7 @@ plot.currencies <- function(data, slugs) {
   grid.newpage()
   grid.draw(g)
 }
-plot.currencies(vals, c("bitcoin","ethereum", "ripple"))
+plot.currencies(vals, c("ripple","stellar"))
 
 # Generates a dataframe with complete daily information for a set of currencies
 analysis.data <- function(currencies, data, market=NULL) {
@@ -184,7 +184,16 @@ analysis.data <- function(currencies, data, market=NULL) {
 }
 
 # Plot returns against each other
-  
+plot.return.vs.return <- function(currency1, currency2, data) {
+  data <- analysis.data(c(currency1, currency2), data)
+  cor_ <- cor(data[[paste("logreturn_",currency1,sep="")]], data[[paste("logreturn_",currency2,sep="")]])
+  p <- ggplot(data, aes_string(x=paste("logreturn_",currency1,sep=""), y=paste("logreturn_",currency2,sep="")))
+  p + geom_point() +
+    labs(title=paste("Returns: ",currency1," vs ",currency2," (cor = ",round(cor_, digits=4),")",sep=""), x=paste(currency1, "Return"), y=paste(currency2, "Return")) +
+    theme(legend.title=element_blank())
+}
+plot.return.vs.return("bitcoin", "ethereum", vals[vals$datetime>as.Date("2016-12-31"),])  
+
 # Generates a dataframe with daily returns for a set of currencies
 analysis.return.data <- function(currencies, data) {
   data <- reshape(data[data$currency_slug %in% currencies,c(6,7,9)], direction="wide", idvar="datetime", timevar="currency_slug")
@@ -204,7 +213,7 @@ plot.corr.timeline <- function(currency1, currency2, mindays, maxdays, data) {
   p <- ggplot(data, aes(datetime, corr))
   p + geom_line() + labs(x="Date", y="Correlation", title=paste("Correlation timeline: ", paste(c(currency1, currency2), collapse=", ")))
 }
-plot.corr.timeline("bitcoin", "ethereum", 30, 90, vals)
+plot.corr.timeline("bitcoin", "bitcoin-cash", 30, 90, vals)
 
 ### 5. Comparing currencies with overall market
 
