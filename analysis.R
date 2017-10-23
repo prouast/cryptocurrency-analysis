@@ -170,7 +170,7 @@ plot.currencies <- function(data, slugs) {
   grid.newpage()
   grid.draw(g)
 }
-plot.currencies(vals, c("ripple","stellar"))
+plot.currencies(vals, c("bitcoin","ethereum", "ripple"))
 
 # Generates a dataframe with complete daily information for a set of currencies
 analysis.data <- function(currencies, data, market=NULL) {
@@ -213,7 +213,7 @@ plot.corr.timeline <- function(currency1, currency2, mindays, maxdays, data) {
   p <- ggplot(data, aes(datetime, corr))
   p + geom_line() + labs(x="Date", y="Correlation", title=paste("Correlation timeline: ", paste(c(currency1, currency2), collapse=", ")))
 }
-plot.corr.timeline("bitcoin", "bitcoin-cash", 30, 90, vals)
+plot.corr.timeline("bitcoin", "ethereum", 30, 90, vals)
 
 ### 5. Comparing currencies with overall market
 

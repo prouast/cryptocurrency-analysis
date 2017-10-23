@@ -11,7 +11,7 @@ The script `analysis.R` can then be run on this database.
 
 ## Progress
 
-*Data updated 16/10/2017.*
+*Data updated 23/10/2017.*
 
 This is a work in progress. Steps taken so far:
 
@@ -90,7 +90,7 @@ This is a work in progress. Steps taken so far:
 
   ![Beta timeline bitcoin, ethereum, ripple](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-timeline.png?style=centerme)
 
-## Crypto millionaire? Give me a tip.
+## Crypto millionaire?
 
 I am updating this page every week or so.
 
