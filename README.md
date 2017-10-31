@@ -11,7 +11,7 @@ The script `analysis.R` can then be run on this database.
 
 ## Progress
 
-*Data updated 23/10/2017.*
+*Data updated 31/10/2017.*
 
 This is a work in progress. Steps taken so far:
 
