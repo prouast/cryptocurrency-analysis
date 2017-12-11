@@ -11,7 +11,7 @@ The script `analysis.R` can then be run on this database.
 
 ## Progress
 
-*Data updated 06/12/2017.*
+*Data updated 11/12/2017.*
 
 This is a work in progress. Steps taken so far:
 
@@ -94,5 +94,5 @@ This is a work in progress. Steps taken so far:
 
 I am updating this page every week or so.
 
-* Donate BTC: 18s8pb2maRn1K1DERJggxUuGVXCw9wTHLD
-* Donate ETH: 0x586a8Dcc5d64A8d8d50e044bD69FA33d2D20c349
+* Tip BTC: 18s8pb2maRn1K1DERJggxUuGVXCw9wTHLD
+* Tip ETH: 0x586a8Dcc5d64A8d8d50e044bD69FA33d2D20c349
