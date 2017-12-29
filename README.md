@@ -11,7 +11,7 @@ The script `analysis.R` can then be run on this database.
 
 ## Progress
 
-*Data updated 20/12/2017.*
+*Data updated 29/12/2017.*
 
 This is a work in progress. Steps taken so far:
 
@@ -26,7 +26,7 @@ This is a work in progress. Steps taken so far:
 
   	Here, we can observe how the market capitalisation has increased in 2017 by a factor of up to 20x.
   	Until mid 2017, we can see how the altcoin boom increased the competition.
-  	More recently, this development has reversed as established coins are gaining back value.
+  	More recently, this development has been less clear, as Bitcoin's value has been volatile.
   	In the data on returns and volatility we find volatility clustering, which is common in financial time series: Times of relative calm, and times of sudden price movements.
   	Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude. The hype of 2017 has caused slightly higher volatility again, however less than we observe for some periods between 2013 and 2015.
   	Note that the annualized volatilities of stock indices such as the S&P 500 are typically much lower, compared to the early crypto days up to an **order of magnitude**.
