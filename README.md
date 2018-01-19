@@ -11,7 +11,7 @@ The script `analysis.R` can then be run on this database.
 
 ## Progress
 
-*Data updated 17/01/2018.*
+*Data updated 19/01/2018.*
 
 This is a work in progress. Steps taken so far:
 
@@ -24,11 +24,11 @@ This is a work in progress. Steps taken so far:
   - **Overall market volatility**: The annualized overall market volatility illustrates the degree in variation of the changes in overall market capitalisation. For each day, the value is based on the logarithmic overall market returns of the last 30 days. [More information.](https://en.wikipedia.org/wiki/Volatility_(finance))
   - **Herfindahl index**: To illustrate the change in competition between currencies. The Herfindahl index measures competition in a market by summing the squares of all competitor market shares. It ranges from 1/N (highly competitive) to 1 (high concentration), where N is the number of competitors. [More information.](https://en.wikipedia.org/wiki/Herfindahl_index)
 
-  	Here, we can observe how the market capitalisation has increased in 2017 by a factor of up to 20x.
-  	Until mid 2017, we can see how the altcoin boom increased the competition.
-  	More recently, this development has been less clear, as Bitcoin's value has been volatile.
+  	Here, we can observe how the market capitalisation has increased during 2017 by a factor of up to 45x.
+  	The altcoin boom has increased the competition significantly since early 2017.
   	In the data on returns and volatility we find volatility clustering, which is common in financial time series: Times of relative calm, and times of sudden price movements.
-  	Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude. The hype of 2017 has caused slightly higher volatility again, however less than we observe for some periods between 2013 and 2015.
+  	Looking at the annualized volatility series, the clusters of high volatility have generally been decreasing in magnitude until late 2016.
+  	The hype during 2017 has caused higher volatility again, however less than we observe for some periods between 2013 and 2015.
   	Note that the annualized volatilities of stock indices such as the S&P 500 are typically much lower, compared to the early crypto days up to an **order of magnitude**.
 
   ![Market statistics](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Market-statistics.png?style=centerme)
@@ -53,13 +53,13 @@ This is a work in progress. Steps taken so far:
 
   - We can also investigate the correlations between the daily returns of arbitrary currencies. Correlation measures the linear relationship between two sets of data. A high positive value when comparing the daily returns of two currencies indicates a strong positive linear relationship of the returns in the past.
 
-  	To illustrate the idea of correlation between two currency returns: **Plotting Bitcoin vs Ethereum returns**. Here, every point represents one day. Notice the slightly positive linear relationship? *Note that this plot is based on data from 2017 only.*
+  	To illustrate the idea of correlation between two currency returns: **Plotting Bitcoin vs Ethereum returns**. Here, every point represents one day. Notice the slightly positive linear relationship? *Note that this plot is based on data since 2017.*
 
   ![Returns bitcoin vs ethereum](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Bitcoin-vs-ethereum-returns.png?style=centerme)
 
   - To get a better idea of the current relationships between currency returns, we can look at pairwise correlations between all currencies. The (symmetric) correlation matrix visualises the correlation for each pair of variables - from perfect positive linear relationship (blue) to perfect negative linear relationship (red).
 
-  	**Visualisation of the correlation matrix for top 25 coins and tokens**. *Note that this plot is based on data from 2017 only.*
+  	**Visualisation of the correlation matrix for top 25 coins and tokens**. *Note that this plot is based on data since 2017.*
 
   ![Corrplot](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Corrplot.png?style=centerme)
 
@@ -73,14 +73,14 @@ This is a work in progress. Steps taken so far:
 
   - Similarly to a previous plot, we can investigate the correlation of arbitrary currency returns with the market return.
 
-  	Example: **Plotting Ethereum vs Market return**. *Note that this plot is based on data from 2017 only.*
+  	Example: **Plotting Ethereum vs Market return**. *Note that this plot is based on data since 2017.*
 
   ![Returns eitcoin vs market](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Ethereum-vs-market-return.png?style=centerme)
 
   - Calculate currency `beta` to characterise the behaviour of each currency return with respect to the market return. Beta represents the covariance of coin returns and market returns, scaled by the variance of the market returns. See [Wikipedia](https://en.wikipedia.org/wiki/Capital_asset_pricing_model) for more information.
   - Investors use the information encoded in the beta coefficient to characterise an asset's volatility and tendency to move in accordance with the market index. `beta = 1` indicates that the asset moves exactly like the market index. [More information.](https://en.wikipedia.org/wiki/Beta_(finance)) Here, the market is dominated by bitcoin, hence bitcoin's beta is very close to 1 and a coin's beta can also be interpreted as a comparison to bitcoin's movement.
 
-  	Here, we plot currency betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data from 2017 only.*
+  	Here, we plot currency betas against market capitalisations for the top 20 coins in terms of market capitalisation. *Note that this plot is based on data since 2017.*
 
   ![Beta vs Mcap](https://raw.githubusercontent.com/prouast/cryptocurrency-analysis/master/Beta-vs-mcap.png?style=centerme)
 
