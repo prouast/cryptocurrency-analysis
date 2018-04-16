@@ -1,34 +1,14 @@
 rm(list=ls(all=TRUE)) # Remove everything from environment
 
-# install.packages("RSQLite")
-# install.packages("ggplot2")
-# install.packages("corrplot")
-# install.packages("zoo")
+# To automatically install require packages
+if (!require(DBI)) install.packages("DBI")
+if (!require(RSQLite)) install.packages("RSQLite")
+if (!require(ggplot2)) install.packages("ggplot2")
+if (!require(grid)) install.packages("grid")
+if (!require(corrplot)) install.packages("corrplot")
+if (!require(zoo)) install.packages("zoo")
+if (!require(magrittr)) install.packages("magrittr")
 
-#To automatically install require packages
-
-if(!require(DBI)){
-    install.packages("DBI")
-	}
-if(!require(RSQLite)){
-    install.packages("RSQLite")
-	}
-if(!require(ggplot2){
-    install.packages("ggplot2")
-	}
-if(!require(grid)){
-    install.packages("grid")
-	}
-if(!require(corrplot)){
-    install.packages("corrplot")
-	}
-if(!require(zoo)){
-    install.packages("zoo")
-	}
-if(!require(magrittr)){
-    install.packages("magrittr")
-	}
-   
 library(DBI)
 library(ggplot2)
 library(grid)
