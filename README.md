@@ -9,6 +9,8 @@ To replicate, first head over to [coinmarketcap-scraper](https://github.com/prou
 this lets you download data from [coinmarketcap](https://coinmarketcap.com) into a local database.
 The script `analysis.R` can then be run on this database.
 
+***Note : First Change the directory to the dir where database file is created by the scrapper. ***
+
 ## Progress
 
 *Data updated 29/3/2018.*
