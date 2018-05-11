@@ -7,9 +7,7 @@ Especially in light of the increasing number of successful coins and [decreasing
 
 To replicate, first head over to [coinmarketcap-scraper](https://github.com/prouast/coinmarketcap-scraper);
 this lets you download data from [coinmarketcap](https://coinmarketcap.com) into a local database.
-The script `analysis.R` can then be run on this database.
-
-***Note : First Change the directory to the dir where database file is created by the scrapper. ***
+The script `analysis.R` can then be run on this database - copy the database file to your R working directory.
 
 ## Progress
 
