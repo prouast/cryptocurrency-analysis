@@ -15,6 +15,7 @@ library(grid)
 library(corrplot)
 library(zoo)
 library(magrittr)
+library(dbConnect)
 
 ### 1. Import and clean daily closing prices for each currency
 
