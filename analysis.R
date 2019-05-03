@@ -202,7 +202,7 @@ plot.return.vs.return <- function(currency1, currency2, data) {
     theme(legend.title=element_blank())
   ggsave("Bitcoin-vs-ethereum-returns.png", width=8, height=4, dpi=100, units="in")
 }
-plot.return.vs.return("bitcoin", "ethereum", vals[vals$datetime>as.Date("2016-12-31"),])  
+plot.return.vs.return("bitcoin", "ethereum", vals[vals$datetime>as.Date("2017-12-31"),])
 
 # Generates a dataframe with daily returns for a set of currencies
 analysis.return.data <- function(currencies, data) {
@@ -214,7 +214,7 @@ analysis.return.data <- function(currencies, data) {
 
 # Plot the correlation matrix for top 25 currency returns
 png(filename="Corrplot.png", width=800, height=700, units="px")
-corrplot(cor(analysis.return.data(currencies[1:25,]$slug,vals[vals$datetime>as.Date("2016-12-31"),])[,-1],
+corrplot(cor(analysis.return.data(currencies[1:25,]$slug,vals[vals$datetime>as.Date("2017-12-31"),])[,-1],
              use = "pairwise.complete.obs"), method="ellipse")
 dev.off()
 
@@ -240,7 +240,7 @@ plot.return.vs.market <- function(currency, data, market) {
     theme(legend.title=element_blank())
   ggsave("Ethereum-vs-market-return.png", width=8, height=4, dpi=100, units="in")
 }
-plot.return.vs.market("ethereum", vals[vals$datetime>as.Date("2016-12-31"),], market)
+plot.return.vs.market("ethereum", vals[vals$datetime>as.Date("2017-12-31"),], market)
 
 # Calculate betas
 currency.beta <- function(currency, data, market) {
@@ -248,7 +248,7 @@ currency.beta <- function(currency, data, market) {
   return(cov(data[data$currency_slug==currency & data$datetime %in% dates,]$logreturn,
              market[market$datetime %in% dates,]$logreturn)/var(market[market$datetime %in% dates,]$logreturn))
 }
-currencies$beta <- sapply(currencies$slug, FUN=currency.beta, vals[vals$datetime>as.Date("2016-12-31"),], market)
+currencies$beta <- sapply(currencies$slug, FUN=currency.beta, vals[vals$datetime>as.Date("2017-12-31"),], market)
 
 # Plot betas of top currencies against latest market cap
 plot.beta.vs.mcap.num <- function(num, currencies) {
